@@ -15,7 +15,7 @@ const charInp = document.querySelector('#char');
 document.querySelector('#d20').addEventListener('click', () => {
     const rnd = Math.floor(Math.random() * 20) + 1;
     if (rnd === 1) {
-        showAlert('Mäng läbi :(');
+        gameOver()
     } else {
         if (rnd === 20) {
             lives++;
@@ -54,11 +54,23 @@ guessBtn.addEventListener('click', () => {
     if (char) {
         char = char.toUpperCase();
         if (word.includes(char)) {
+            let success = false;
             word.split('').forEach((c, index) => {
                 if (c === char) {
-                    result[index] = c;
+                    if (result[index] !== c) {
+                        result[index] = c;
+                        success = true;
+                    }
                 }
             });
+            if (!success) {
+                showAlert(char + ' tähte rohkem ei esine :(');
+                lives--;
+                livesElement.innerHTML = lives.toString();
+                if (lives === 0) {
+                    gameOver()
+                }
+            }
             showWord();
             if (result.filter(c => c === '_').length === 0) {
                 showAlert('Sinu võit');
@@ -70,9 +82,7 @@ guessBtn.addEventListener('click', () => {
             lives--;
             livesElement.innerHTML = lives.toString();
             if (lives === 0) {
-                showAlert('Mäng läbi :(');
-                charInp.disabled = true;
-                guessBtn.disabled = true;
+                gameOver()
             }
         }
     }
@@ -99,5 +109,13 @@ function showAlert(msg) {
 
 function showWord() {
     wordElement.innerHTML = result.join(' ');
+}
+
+function gameOver() {
+    wordElement.innerHTML = word;
+    showAlert('Mäng läbi :(');
+    charInp.disabled = true;
+    guessBtn.disabled = true;
+    d20Btn.disabled = true;
 }
 
