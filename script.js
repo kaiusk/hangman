@@ -90,8 +90,7 @@ guessBtn.addEventListener('click', () => {
 });
 
 window.onload = () => {
-    const rnd = Math.ceil(Math.random() * (words.length - 1));
-    console.log(rnd, words.length)
+    const rnd = Math.floor(Math.random() * words.length);
     word = words[rnd];
     result = new Array(word.length).fill('_');
     showWord();
