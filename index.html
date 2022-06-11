@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="alert" id="alert">
+mäng läbi
+    </div>
+    <div class="row">
+        <h1 id="word"></h1>
+        <h2>Elusid <span id="lives">5</span></h2>
+    </div>
+    <div class="row">
+        <button id="d20">veereta d20</button>
+        <button id="dprsnt" disabled>veereta d%</button>
+    </div>
+    <div class="row">
+        <input type="text" maxlength="1" placeholder="täht" disabled id="char" onkeyup="this.value = this.value.toUpperCase();">
+        <button id="guess" disabled>arva</button>
+    </div>
+</body>
+</html>
